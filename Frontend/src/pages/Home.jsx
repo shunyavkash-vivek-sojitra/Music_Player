@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import SongCard from "../components/SongCard";
 import Slider from "../components/Slider";
 
-// to get the highest quality image
+// To get the highest quality image
 const getArtworkURL = (artwork) => {
   if (!artwork) return "";
   if (typeof artwork === "string")
-    return artwork.replace("{w}x{h}", "1000x1000"); // Ensure high resolution
-  return artwork["1000x1000"] || artwork["480x480"] || artwork["150x150"] || ""; // Best available
+    return artwork.replace("{w}x{h}", "1000x1000");
+  return artwork["1000x1000"] || artwork["480x480"] || artwork["150x150"] || "";
 };
 
 const Home = () => {

@@ -3,7 +3,7 @@
   color: var(--text-light);
 }
 
-/* 🎵 Hero Section */
+/* Hero Section */
 .hero-section {
   position: relative;
   width: 100%;
@@ -38,13 +38,13 @@
   opacity: 0.8;
 }
 
-/* 🔥 Trending Songs Slider */
+/* Trending Songs Slider */
 .section-title {
   font-size: 1.8rem;
   margin: 20px 0;
 }
 
-/* 🎼 Song Grid */
+/* Song Grid */
 .song-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -52,7 +52,7 @@
   margin-top: 20px;
 }
 
-/* ⏳ Loading State */
+/* Loading State */
 .loading {
   text-align: center;
   font-size: 1.2rem;

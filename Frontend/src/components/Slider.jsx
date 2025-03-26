@@ -8,7 +8,7 @@ const Slider = ({ title, items }) => {
         {items.map((item, index) => (
           <div key={index} className="slider-item">
             <img
-              src={item.artworkURL} // ✅ Uses correct image URL
+              src={item.artworkURL}
               alt={item.title}
               className="slider-image"
             />
