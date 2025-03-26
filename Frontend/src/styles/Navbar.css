@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: var(--secondary-color);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.search-bar {
+  padding: 10px 15px;
+  width: 350px;
+  border-radius: 25px;
+  border: none;
+  background: var(--glass-effect);
+  color: var(--text-light);
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.search-bar:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.search-bar::placeholder {
+  color: #bbb;
+}

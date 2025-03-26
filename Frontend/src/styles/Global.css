@@ -1,0 +1,33 @@
+/* Global styles for modern, sleek UI */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #1db954;
+  --secondary-color: #191414;
+  --background-dark: #121212;
+  --background-light: #f5f5f5;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --glass-effect: rgba(255, 255, 255, 0.2);
+  --hover-effect: rgba(255, 255, 255, 0.2);
+  --text-light: #fff;
+  --text-dark: #333;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--background-dark);
+  color: var(--text-light);
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Light/Dark Mode */
+body.light-mode {
+  background: var(--background-light);
+  color: var(--text-dark);
+}
