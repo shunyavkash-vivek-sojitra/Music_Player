@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const songRoutes = require("./songRoutes");
+const tracksRoutes = require("./tracksRoutes");
 
-router.use("/", songRoutes);
+router.use("/tracks", tracksRoutes);
 
 module.exports = router;

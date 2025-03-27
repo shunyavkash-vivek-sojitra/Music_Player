@@ -3,7 +3,7 @@ import axios from "axios";
 export const fetchSongs = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/allsongs/fetchSongs"
+      "http://localhost:5000/api/collection/tracks/fetchAll"
     );
     dispatch({ type: "SET_SONGS", payload: response.data.data });
   } catch (error) {

@@ -22,17 +22,18 @@ const MusicPlayer = () => {
       try {
         console.log("🎵 Fetching details for track:", currentSong.id);
 
-        // ✅ Fetch track details
+        // Fetch track details
         const response = await fetch(`${API_BASE}/${currentSong.id}`);
         if (!response.ok) throw new Error("Failed to fetch track details");
 
         const { data: trackDetails } = await response.json();
-        console.log("✅ Track Details:", trackDetails);
+        console.log("Track Details:", trackDetails);
 
-        // ✅ Set artwork (ensure it's valid)
+        // Set artwork (ensure it's valid)
         let artwork = trackDetails?.artwork;
-        if (typeof artwork === "object" && artwork?.url) {
-          artwork = artwork.url;
+        console.log("object:", artwork);
+        if (typeof artwork === "object") {
+          artwork = Object.values(artwork)[0];
         }
 
         if (
@@ -40,28 +41,28 @@ const MusicPlayer = () => {
           typeof artwork !== "string" ||
           !artwork.startsWith("http")
         ) {
-          artwork = "/default-image.jpg";
+          // artwork = "/default-image.jpg";
         }
 
-        console.log("🎨 Artwork URL:", artwork);
-        setArtworkUrl(artwork);
+        console.log("Artwork URL:", artwork);
+        setArtworkUrl(artwork || "No Image");
 
-        // ✅ Fetch stream URL
+        // Fetch stream URL
         const streamResponse = await fetch(
           `${API_BASE}/${currentSong.id}/stream`
         );
         const { streamUrl } = await streamResponse.json();
         if (!streamUrl) throw new Error("Invalid stream URL");
 
-        console.log("✅ Stream URL:", streamUrl);
+        console.log("Stream URL:", streamUrl);
 
-        // ✅ Stop previous audio before updating
+        // Stop previous audio before updating
         audioRef.current.pause();
         audioRef.current.src = ""; // Clear source
         setStreamUrl(streamUrl);
         setIsPlaying(true); // Auto-play when song loads
       } catch (error) {
-        console.error("❌ Error fetching track details or stream:", error);
+        console.error("Error fetching track details or stream:", error);
         setStreamUrl(null);
         setArtworkUrl("/default-image.jpg");
         setError("Song cannot be played.");
@@ -79,16 +80,16 @@ const MusicPlayer = () => {
     const audio = audioRef.current;
     audio.src = streamUrl;
 
-    // ✅ Auto-play the song
+    // Auto-play the song
     audio
       .play()
       .then(() => setIsPlaying(true))
       .catch((err) => {
-        console.error("❌ Play error:", err);
+        console.error("Play error:", err);
         setIsPlaying(false);
       });
 
-    // ✅ Ensure play/pause works properly
+    // Ensure play/pause works properly
     const handleEnded = () => setIsPlaying(false);
     audio.addEventListener("ended", handleEnded);
 
@@ -104,9 +105,7 @@ const MusicPlayer = () => {
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current
-        .play()
-        .catch((err) => console.error("❌ Play error:", err));
+      audioRef.current.play().catch((err) => console.error("Play error:", err));
     }
     setIsPlaying(!isPlaying);
   };

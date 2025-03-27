@@ -1,13 +1,14 @@
 const express = require("express");
+const env = require("dotenv").config();
 const cors = require("cors");
 const axios = require("axios");
-const route = require("./routes/songRoutes");
+const route = require("./routes/indexRoutes");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Step 1: Get a working Audius discovery node dynamically
+// Discovery Provider
 async function getDiscoveryNode() {
   try {
     const response = await axios.get(
@@ -17,12 +18,12 @@ async function getDiscoveryNode() {
       return response.data.data[0]; // Pick the first working node
     }
   } catch (error) {
-    console.error("❌ Error fetching discovery node:", error.message);
+    console.error("Error fetching discovery node:", error.message);
   }
   return "https://discoveryprovider.audius.co"; // Fallback URL
 }
 
-// ✅ Step 2: Fetch track details
+// Fetch track details
 app.get("/api/tracks/:id", async (req, res) => {
   try {
     const discoveryNode = await getDiscoveryNode();
@@ -30,12 +31,12 @@ app.get("/api/tracks/:id", async (req, res) => {
     const response = await axios.get(`${discoveryNode}/v1/tracks/${trackId}`);
     res.json(response.data);
   } catch (error) {
-    console.error("❌ Error fetching track details:", error.message);
+    console.error("Error fetching track details:", error.message);
     res.status(500).json({ error: "Failed to fetch track details" });
   }
 });
 
-// ✅ Step 3: Fetch the actual stream URL
+// Fetch a single track
 app.get("/api/tracks/:id/stream", async (req, res) => {
   try {
     const discoveryNode = await getDiscoveryNode();
@@ -57,14 +58,12 @@ app.get("/api/tracks/:id/stream", async (req, res) => {
       throw new Error("Invalid response from Audius API");
     }
   } catch (error) {
-    console.error("❌ Error fetching stream URL:", error.message);
+    console.error("Error fetching stream URL:", error.message);
     res.status(500).json({ error: "Failed to fetch stream URL" });
   }
 });
 
-// ✅ Existing routes
-app.use("/api/allsongs", route);
+app.use("/api/collection", route);
 
-// ✅ Start server
-const PORT = 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log(`* Server is running on port ${PORT}`));
