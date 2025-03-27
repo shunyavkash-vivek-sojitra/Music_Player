@@ -2,21 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import SongCard from "../components/SongCard";
 import Slider from "../components/Slider";
-
-// To get the highest quality image
-const getArtworkURL = (artwork) => {
-  if (!artwork) return "";
-  if (typeof artwork === "string")
-    return artwork.replace("{w}x{h}", "1000x1000");
-  return artwork["1000x1000"] || artwork["480x480"] || artwork["150x150"] || "";
-};
+import MusicPlayer from "../components/MusicPlayer";
+import { getArtworkURL } from "../utils/utils.js";
 
 const Home = () => {
   const songs = useSelector((state) => state.songs);
 
   return (
     <div className="home">
-      {/* Hero Section */}
+      {/* 🎵 Hero Section */}
       {songs.length > 0 && (
         <div className="hero-section">
           <div className="hero-overlay">
@@ -26,25 +20,25 @@ const Home = () => {
             </p>
           </div>
           <img
-            src={getArtworkURL(songs[0]?.artwork)}
+            src={getArtworkURL(songs[0].artwork)}
             alt="Hero Song"
             className="hero-image"
           />
         </div>
       )}
 
-      {/* Trending Songs Slider */}
+      {/* 🔥 Trending Songs Slider */}
       {songs.length > 0 && (
         <Slider
           title="🔥 Trending Songs"
           items={songs.slice(0, 15).map((song) => ({
             ...song,
-            artworkURL: getArtworkURL(song?.artwork),
+            artworkURL: getArtworkURL(song.artwork),
           }))}
         />
       )}
 
-      {/* Song Grid Section */}
+      {/* 🎼 Song Grid Section */}
       <h2 className="section-title">All Songs</h2>
       <div className="song-grid">
         {songs.length > 0 ? (
@@ -53,6 +47,9 @@ const Home = () => {
           <div className="loading">Loading songs...</div>
         )}
       </div>
+
+      {/* 🎵 Floating Music Player */}
+      <MusicPlayer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentSong } from "../services/actions";
+import { getArtworkURL } from "../utils/utils.js";
 
 const SongCard = ({ song }) => {
   const dispatch = useDispatch();
@@ -11,10 +12,7 @@ const SongCard = ({ song }) => {
 
   return (
     <div className="song-card" onClick={handlePlay}>
-      <img
-        src={song.artwork?.["150x150"] || "fallback-image.jpg"}
-        alt={song.title}
-      />
+      <img src={getArtworkURL(song.artwork)} alt={song.title} />
       <h3>{song.title || "Unknown Title"}</h3>
       <p>{song.artist || "Unknown Artist"}</p>
     </div>

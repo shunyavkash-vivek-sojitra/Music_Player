@@ -20,6 +20,7 @@
 }
 
 .song-card h3 {
+  text-wrap: wrap;
   font-size: 18px;
 }
 
