@@ -1,6 +1,6 @@
 .song-card {
   background: var(--card-bg);
-  padding: 15px;
+  padding: 10px;
   border-radius: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
