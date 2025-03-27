@@ -13,18 +13,18 @@ const Slider = ({ title, items }) => {
     <div className="slider-section">
       <h2 className="slider-title">{title}</h2>
       <div className="slider-container">
-        {items.map((song, index) => (
+        {items.map((item, index) => (
           <div
             key={index}
             className="slider-item"
-            onClick={() => handlePlay(song)}
+            onClick={() => handlePlay(item)}
           >
             <img
-              src={song.artworkURL}
-              alt={song.title}
+              src={item.artworkURL}
+              alt={item.title}
               className="slider-image"
             />
-            <p className="slider-text">{song.title}</p>
+            <p className="slider-text">{item.title}</p>
           </div>
         ))}
       </div>
